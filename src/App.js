@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { Stack } from "@fluentui/react";
+import TaskList from './components/TaskList';
+import AddTask from './components/AddTask';
 
 function App() {
+  const [tasks, setTasks] = useState([{ id: 1, name: "Task Item 1" }, { id: 2, name: "Task Item 2" }]);
+
+  const addTask = (taskName) => {
+    if (taskName !== "") {
+      const newId = tasks.length + 1;
+      const newTasks = [...tasks, { id: newId, name: taskName }];
+      setTasks(newTasks);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="wrapper">
+        <Stack horizontalAlign="center">
+          <h1>taskr</h1>
+          <Stack style={{ width: 300 }} gap={25}>
+            <AddTask addTask={addTask} />
+            <TaskList tasks={tasks} />
+          </Stack>
+        </Stack>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default App;  
