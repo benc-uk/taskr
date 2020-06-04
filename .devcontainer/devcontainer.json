@@ -12,11 +12,13 @@
 		"dbaeumer.vscode-eslint",
 		"ms-azuretools.vscode-azurefunctions",
 		"ms-vscode.azure-account",
-		"ms-azuretools.vscode-cosmosdb"
+		"ms-azuretools.vscode-cosmosdb",
+		"humao.rest-client",
+		"msjsdiag.debugger-for-chrome"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [ 7071 ],
+	"forwardPorts": [ 7071, 3000 ],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "npm install",

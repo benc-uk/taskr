@@ -9,6 +9,17 @@
       "options": {
         "cwd": "${workspaceFolder}/api"
       }
+    },
+    {
+      "label": "Start React server",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "start"],
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
     }
   ]
 }

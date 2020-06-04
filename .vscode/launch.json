@@ -2,7 +2,23 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach to Node Functions",
+
+      "name": "Debug React (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      },
+      // "pathMapping": {
+      //   "http://localhost:3000/": "${workspaceFolder}/src"
+      // }
+      //"preLaunchTask": "npm: start"
+    },
+    
+    {
+      "name": "Debug API (Functions)",
       "type": "node",
       "request": "attach",
       "port": 9229,

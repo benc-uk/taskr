@@ -2,5 +2,18 @@
   "azureFunctions.deploySubpath": "api",
   "azureFunctions.projectLanguage": "JavaScript",
   "azureFunctions.projectRuntime": "~3",
-  "debug.internalConsoleOptions": "neverOpen"
+  "debug.internalConsoleOptions": "neverOpen",
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  
+  "eslint.format.enable": true,
+
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "eslint.workingDirectories": [
+    "./src"
+  ]
 }
