@@ -1,5 +1,6 @@
 FROM node:12-buster
 
+# Main microsoft repo
 RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg && \
     mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/ && \
     wget -q https://packages.microsoft.com/config/debian/10/prod.list && \
@@ -7,6 +8,10 @@ RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor 
     chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg && \
     chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 
+# Azure CLI repo
+RUN AZ_REPO=$(lsb_release -cs) && \
+    echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | tee /etc/apt/sources.list.d/azure-cli.list
+
 RUN apt-get update && \
-    apt-get install -y apt-transport-https azure-functions-core-tools-3 dotnet-sdk-3.1
+    apt-get install -y apt-transport-https azure-functions-core-tools-3 azure-cli
 
