@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/proxies",
+  "proxies": {
+    "test": {
+      "matchCondition": {
+        "route": "api/events/{n}",
+        "methods": [
+          "GET"
+        ]
+      },
+      "backendUri": "http://localhost/api/getTest?name={n}"
+    }
+  }
+}
