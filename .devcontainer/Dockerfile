@@ -14,5 +14,5 @@ RUN AZ_REPO=buster && \
 
 # Install tools
 RUN apt-get update && \
-    apt-get install -y apt-transport-https azure-functions-core-tools-3 azure-cli
+    apt-get install -y apt-transport-https azure-functions-core-tools-3 azure-cli zsh
 
