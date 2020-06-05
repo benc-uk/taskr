@@ -1,1 +1,1 @@
-GET http://localhost:7071/api/debug
+GET http://localhost:7071/api/test
