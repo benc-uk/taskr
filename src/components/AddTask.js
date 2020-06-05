@@ -7,10 +7,10 @@ function AddTask(props) {
     const addTask = () => {
         props.addTask(taskName);
         setTaskName("");
-    }
+    };
     const setTask = (e) => {
         setTaskName(e.target.value);
-    }
+    };
 
     return (
         <Stack>

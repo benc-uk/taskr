@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Stack } from "@fluentui/react";
-import TaskList from './components/TaskList';
-import AddTask from './components/AddTask';
+import { AppHeader, TaskList, AddTask } from './components';
 
 const persistTask = async (task) => {
   let response = await fetch(`${process.env.REACT_APP_API}/getTest?name=${task}`);
@@ -24,6 +23,9 @@ function App() {
 
   return (
     <div className="App">
+      <div className="App_header">
+        <AppHeader />
+      </div>
       <div className="wrapper">
         <Stack horizontalAlign="center">
           <h1>taskr</h1>
