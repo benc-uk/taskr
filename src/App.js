@@ -4,13 +4,20 @@ import { Stack } from "@fluentui/react";
 import TaskList from './components/TaskList';
 import AddTask from './components/AddTask';
 
+const persistTask = async (task) => {
+  let response = await fetch(`${process.env.REACT_APP_API}/getTest?name=${task}`);
+  let text = await response.text();
+  return text;
+};
+
 function App() {
   const [tasks, setTasks] = useState([{ id: 1, name: "Task Item 1" }, { id: 2, name: "Task Item 2" }]);
 
-  const addTask = (taskName) => {
+  const addTask = async (taskName) => {
     if (taskName !== "") {
       const newId = tasks.length + 1;
-      const newTasks = [...tasks, { id: newId, name: taskName }];
+      const text = await persistTask(taskName);
+      const newTasks = [...tasks, { id: newId, name: text }];
       setTasks(newTasks);
     }
   };
