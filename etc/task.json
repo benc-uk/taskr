@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/benc-uk/dapr-store/master/cmd/orders/spec/schema.json",
+  "type": "object",
+  "title": "Task entity",
+  "required": [
+    "id",
+    "title",
+    "complete",
+    "owner",
+    "assignedTo"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "title": "The task ID"
+    },
+    "title": {
+      "$id": "#/properties/title",
+      "type": "string",
+      "title": "The task title"
+    },
+    "complete": {
+      "$id": "#/properties/complete",
+      "type": "boolean",
+      "title": "Is the task finished yet"
+    },
+    "owner": {
+      "$id": "#/properties/owner",
+      "type": "string",
+      "title": "The UPN of the task owner",
+      "format": "email"
+    },
+    "notes": {
+      "$id": "#/properties/notes",
+      "type": "string",
+      "title": "The task notes, free text"
+    },
+    "assignedTo": {
+      "$id": "#/properties/assignedTo",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "email"
+      },
+      "title": "List of UPNs of assigned users"
+    },
+    "priority": {
+      "$id": "#/properties/priority",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "title": "The task priority"
+    }
+  }
+}
