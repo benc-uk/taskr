@@ -1,1 +1,10 @@
 GET http://localhost:7071/api/test
+
+###
+
+POST http://localhost:7071/api/test
+
+Content-Type: application/json
+{
+  "hello": "world"
+}
