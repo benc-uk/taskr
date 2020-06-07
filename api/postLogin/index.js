@@ -22,12 +22,11 @@ module.exports = async function (context, req) {
 
     // Create/update user in Cosmos
     user.id = user.userId
-    const newItem = await users.items.upsert(user)
+    await users.items.upsert(user)
 
     context.res = {
-      headers: { 'content-type': 'application/json' },
-      status: newItem.statusCode,
-      body: newItem.resource
+      headers: { 'location': '/' },
+      status: 302,
     }
   } catch (err) {
     let message = typeof err != 'string' ? (err.message ? err.message : err) : err
