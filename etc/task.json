@@ -3,12 +3,17 @@
   "$id": "https://raw.githubusercontent.com/benc-uk/dapr-store/master/cmd/orders/spec/schema.json",
   "type": "object",
   "title": "Task entity",
+  "additionalProperties": false,
   "required": [
     "id",
     "title",
     "complete",
     "owner",
-    "assignedTo"
+    "notes",
+    "assignedTo",
+    "priority",
+    "createdDate",
+    "modifiedDate"
   ],
   "properties": {
     "id": {
@@ -19,6 +24,7 @@
     "title": {
       "$id": "#/properties/title",
       "type": "string",
+      "minLength": 1,
       "title": "The task title"
     },
     "complete": {
@@ -29,8 +35,7 @@
     "owner": {
       "$id": "#/properties/owner",
       "type": "string",
-      "title": "The UPN of the task owner",
-      "format": "email"
+      "title": "The user-id of the task owner"
     },
     "notes": {
       "$id": "#/properties/notes",
@@ -42,10 +47,9 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "type": "string",
-        "format": "email"
+        "type": "string"
       },
-      "title": "List of UPNs of assigned users"
+      "title": "List of user-ids of assigned users"
     },
     "priority": {
       "$id": "#/properties/priority",
@@ -53,6 +57,18 @@
       "minimum": 1,
       "maximum": 5,
       "title": "The task priority"
-    }
+    },
+    "createdDate": {
+      "$id": "#/properties/createdDate",
+      "type": "string",
+      "format": "date-time",
+      "title": "Created date & time in ISO 8601 format"
+    },
+    "modifiedDate": {
+      "$id": "#/properties/modifiedDate",
+      "type": "string",
+      "format": "date-time",
+      "title": "Last modification date & time in ISO 8601 format"
+    }    
   }
 }

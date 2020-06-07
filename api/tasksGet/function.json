@@ -8,7 +8,7 @@
       "methods": [
         "get"
       ],
-      "route": "tasks/ownedBy/{user}"
+      "route": "tasks"
     },
     {
       "type": "http",

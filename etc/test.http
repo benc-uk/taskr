@@ -1,10 +1,27 @@
-GET http://localhost:7071/api/test
+### Get by owner
+GET http://localhost:7071/api/tasks?rtr=4&owner=ben123
 
-###
+### Get by assignee
+GET http://localhost:7071/api/tasks?assignee=jason123
 
-POST http://localhost:7071/api/test
-
+### Create a task
+POST http://localhost:7071/api/tasks
 Content-Type: application/json
+
 {
-  "hello": "world"
+  "title": "Demo task {{$randomInt 1 100000}}",
+  "assignedTo": [ "wewew" ],
+  "notes": "This is a test, bye!"
+}
+
+### Get all users
+GET http://localhost:7071/api/users
+
+### Create a user
+POST http://localhost:7071/api/users
+Content-Type: application/json
+
+{
+  "id": "45345435",
+  "name": "Jason Cabot"
 }
