@@ -7,7 +7,7 @@ module.exports = async function (context, req) {
     // Get the user from the special client-principal header
     if (req.headers['x-ms-client-principal']) {
       const encoded = Buffer.from(req.headers['x-ms-client-principal'], 'base64')
-      user = encoded.toString('ascii')
+      user = JSON.parse(encoded.toString('ascii'))
     } else {
       context.res = {
         headers: { 'content-type': 'application/json' },
