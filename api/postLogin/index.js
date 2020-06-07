@@ -4,16 +4,10 @@ module.exports = async function (context, req) {
   let errorStatus = 500
   try {
     let user = {}
-    // Get the owner from the special client-principal header
+    // Get the user from the special client-principal header
     if (req.headers['x-ms-client-principal']) {
       const encoded = Buffer.from(req.headers['x-ms-client-principal'], 'base64')
-      const principal = encoded.toString('ascii')
-      user.name = principal.userDetails
-      user.id = principal.userId
-      context.res = {
-        body: principal
-      }
-      return
+      user = encoded.toString('ascii')
     } else {
       context.res = {
         headers: { 'content-type': 'application/json' },
@@ -27,6 +21,7 @@ module.exports = async function (context, req) {
     const users = await cosmos.users()
 
     // Create/update user in Cosmos
+    user.id = user.userId
     const newItem = await users.items.upsert(user)
 
     context.res = {

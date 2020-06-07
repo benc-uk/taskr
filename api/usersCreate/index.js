@@ -10,14 +10,14 @@ module.exports = async function (context, req) {
     let user = req.body
 
     // Validate task against schema
-    let ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
-    const schema = require('../../etc/user.json')
-    let validate = ajv.compile(schema)
-    let valid = validate(user)
-    if (!valid) {
-      errorStatus = 400
-      throw validate.errors
-    }
+    // let ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
+    // const schema = require('../../etc/user.json')
+    // let validate = ajv.compile(schema)
+    // let valid = validate(user)
+    // if (!valid) {
+    //   errorStatus = 400
+    //   throw validate.errors
+    // }
 
     // Create document in Cosmos
     const newItem = await users.items.upsert(user)

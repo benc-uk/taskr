@@ -1,8 +1,10 @@
 ### Get by owner
 GET http://localhost:7071/api/tasks?rtr=4&owner=ben123
 
+
 ### Get by assignee
 GET http://localhost:7071/api/tasks?assignee=jason123
+
 
 ### Create a task
 POST http://localhost:7071/api/tasks
@@ -14,14 +16,19 @@ Content-Type: application/json
   "notes": "This is a test, bye!"
 }
 
+
 ### Get all users
 GET http://localhost:7071/api/users
+
 
 ### Create a user
 POST http://localhost:7071/api/users
 Content-Type: application/json
 
 {
-  "id": "45345435",
-  "name": "Jason Cabot"
+  "id": "53637e882dc34794aca9864e026acd2a",
+  "name": "becolem@microsoft.com"
 }
+
+###
+GET http://localhost:7071/api/postLogin
