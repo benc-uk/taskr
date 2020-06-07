@@ -10,6 +10,10 @@ module.exports = async function (context, req) {
       const principal = encoded.toString('ascii')
       user.name = principal.userDetails
       user.id = principal.userId
+      context.res = {
+        body: principal
+      }
+      return
     } else {
       context.res = {
         headers: { 'content-type': 'application/json' },
