@@ -4,7 +4,7 @@ module.exports = async function (context, req) {
   let errorStatus = 500
   try {
     let user = {}
-    // Get the user from the special client-principal header
+    // Decode the base64 user details from the special client-principal header
     if (req.headers['x-ms-client-principal']) {
       const encoded = Buffer.from(req.headers['x-ms-client-principal'], 'base64')
       user = JSON.parse(encoded.toString('ascii'))
@@ -20,10 +20,14 @@ module.exports = async function (context, req) {
     // Get Cosmos DB container
     const users = await cosmos.users()
 
-    // Create/update user in Cosmos
+    // Copy `userId` into `id` (the id used by Cosmos)
+    // Otherwise we'd create duplicate users with different ids
     user.id = user.userId
+
+    // Create/update user in Cosmos
     await users.items.upsert(user)
 
+    // Redirect back to root
     context.res = {
       headers: { 'location': '/' },
       status: 302,

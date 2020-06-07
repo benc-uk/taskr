@@ -8,7 +8,7 @@
       "methods": [
         "post"
       ],
-      "route": "users"
+      "route": "DISABLED_ZZZ"
     },
     {
       "type": "http",
