@@ -6,9 +6,9 @@
       "direction": "in",
       "name": "req",
       "methods": [
-        "post"
+        "get"
       ],
-      "route": "users"
+      "route": "postLogin"
     },
     {
       "type": "http",

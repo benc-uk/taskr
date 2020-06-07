@@ -2,7 +2,7 @@
     "routes": [
         {
             "route": "/login",
-            "serve": "/.auth/login/aad"
+            "serve": "/.auth/login/aad?post_login_redirect_uri=%2Fapi%2FpostLogin"
         },
         {
             "route": "/*",
