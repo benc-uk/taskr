@@ -18,9 +18,9 @@
       return clientPrincipal;
     }
 
-    let user = getUserInfo();
+    let user = await getUserInfo();
     console.log(user);
-    document.getElementById('blah').innerHTML = user.toString()
+    document.getElementById('blah').innerHTML = user
   </script>
 </body>
 </html>
