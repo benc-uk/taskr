@@ -13,6 +13,9 @@ const database = client.database(COSMOS_DB_NAME)
 module.exports = {
   // Get or create the tasks container
   async tasks() {
+    if (!(COSMOS_ENDPOINT || COSMOS_KEY)) {
+      throw new Error('Fatal error! COSMOS_ENDPOINT or COSMOS_KEY are not set')
+    }
     const { container } = await database.containers.createIfNotExists({
       id: COSMOS_TASKS_CONTAINER,
       partitionKey: {
@@ -24,6 +27,9 @@ module.exports = {
 
   // Get or create the users container
   async users() {
+    if (!(COSMOS_ENDPOINT || COSMOS_KEY)) {
+      throw new Error('Fatal error! COSMOS_ENDPOINT or COSMOS_KEY are not set')
+    }
     const { container } = await database.containers.createIfNotExists({
       id: COSMOS_USERS_CONTAINER,
       partitionKey: {
