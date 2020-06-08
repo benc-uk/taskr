@@ -1,10 +1,9 @@
 module.exports = {
   extends: [
-    "react-app",
     "eslint:recommended"
   ],
   env: {
-    es6: true
+    node: true
   },
   rules: {
     // Errors & best practices

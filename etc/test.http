@@ -13,6 +13,7 @@ Content-Type: application/json
 {
   "title": "Demo task {{$randomInt 1 100000}}",
   "assignedTo": [ "wewew" ],
+  "owner": "dave",
   "notes": "This is a test, bye!"
 }
 
@@ -32,3 +33,7 @@ Content-Type: application/json
 
 ### Won't work locally
 GET http://localhost:7071/api/postLogin
+
+###
+
+GET http://localhost:7071/api/debugger
