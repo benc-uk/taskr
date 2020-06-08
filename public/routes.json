@@ -1,25 +1,36 @@
 {
   "routes": [
+
     {
       "route": "/test/*",
       "serve": "/api/debugger",
       "statusCode": 200
     },
+
+    {
+      "route": "/foo/*",
+      "serve": "/foo.html",
+      "statusCode": 200
+    },    
+
     {
       "route": "/test301",
       "serve": "/api/debugger",
       "statusCode": 301
-    },    
+    },   
+
     {
       "route": "/postLogin",
       "serve": "/api/postLogin",
       "statusCode": 200
     },
+
     {
       "route": "/wibble",
       "serve": "/foo.html",
       "statusCode": 301
     },
+
     {
       "route": "/*",
       "serve": "/index.html",
