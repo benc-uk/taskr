@@ -1,5 +1,10 @@
 {
   "routes": [
+    {
+      "route": "/test-folder-200",
+      "serve": "/test",
+      "statusCode": 200
+    },
 
     {
       "route": "/test-api-200",
@@ -18,6 +23,12 @@
       "serve": "/foo.html",
       "statusCode": 200
     },    
+
+    {
+      "route": "/test-folder-301",
+      "serve": "/test",
+      "statusCode": 301
+    },
 
     {
       "route": "/test-api-301",
