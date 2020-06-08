@@ -24,7 +24,7 @@
     
     {
       "route": "/twitter-login-200-query",
-      "serve": "/.auth/login/twitter\\?post_login_redirect_uri=/api/postLogin",
+      "serve": "/.auth/login/twitter\?post_login_redirect_uri=/api/postLogin",
       "statusCode": 200
     },    
 
@@ -59,7 +59,7 @@
     
     {
       "route": "/twitter-login-301-query",
-      "serve": "/.auth/login/twitter\\?post_login_redirect_uri=/api/postLogin",
+      "serve": "/.auth/login/twitter\?post_login_redirect_uri=/api/postLogin",
       "statusCode": 301
     },      
 
