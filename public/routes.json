@@ -2,7 +2,12 @@
   "routes": [
     {
       "route": "/test",
-      "serve": "/api/debugger"
+      "serve": "/api/debugger",
+      "statusCode": 301
+    },
+    {
+      "route": "/foobar",
+      "serve": "/foo.html"
     }
   ]
 }
