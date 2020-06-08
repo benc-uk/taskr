@@ -6,6 +6,11 @@
       "statusCode": 200
     },
     {
+      "route": "/test301",
+      "serve": "/api/debugger",
+      "statusCode": 301
+    },    
+    {
       "route": "/postLogin",
       "serve": "/api/postLogin",
       "statusCode": 200
@@ -16,9 +21,9 @@
       "statusCode": 301
     },
     {
-      "route": "/test-redirect",
-      "serve": "/api/debugger",
-      "statusCode": 301
-    }    
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    }       
   ]
 }
