@@ -3,6 +3,15 @@
     {
       "route": "/test",
       "serve": "/api/debugger"
+    },
+    {
+      "route": "/postLogin",
+      "serve": "/api/postLogin"
+    },
+    {
+      "route": "/wibble",
+      "serve": "/foo.html",
+      "statusCode": 301
     }
   ]
 }
