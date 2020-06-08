@@ -1,8 +1,0 @@
-{
-  "routes": [
-    {
-      "route": "/test2",
-      "serve": "/api/debugger"
-    }
-  ]
-}
