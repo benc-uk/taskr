@@ -1,10 +1,12 @@
 {
   "routes": [
+
     {
       "route": "/test-folder-200",
       "serve": "/test",
       "statusCode": 200
     },
+
 
     {
       "route": "/test-api-200",
@@ -12,11 +14,19 @@
       "statusCode": 200
     },
 
+
+    {
+      "route": "/twitter-login-200",
+      "serve": "/.auth/login/twitter",
+      "statusCode": 200
+    },
+
     {
       "route": "/twitter-login-200",
       "serve": "/.auth/login/twitter?post_login_redirect_uri=/api/postLogin",
       "statusCode": 200
-    },
+    },    
+
 
     {
       "route": "/test-page-200",
@@ -38,20 +48,20 @@
 
     {
       "route": "/twitter-login-301",
-      "serve": "/.auth/login/twitter?post_login_redirect_uri=/api/postLogin",
+      "serve": "/.auth/login/twitter",
       "statusCode": 301
     },  
+
+    {
+      "route": "/twitter-login-301",
+      "serve": "/.auth/login/twitter?post_login_redirect_uri=/api/postLogin",
+      "statusCode": 301
+    },      
 
     {
       "route": "/test-page-301",
       "serve": "/foo.html",
       "statusCode": 301
-    },      
-
-    {
-      "route": "/*",
-      "serve": "/index.html",
-      "statusCode": 200
-    }       
+    }
   ]
 }
