@@ -2,6 +2,12 @@
   "routes": [
 
     {
+      "route": "/test-api-200",
+      "serve": "/api/debugger",
+      "statusCode": 200
+    },
+
+    {
       "route": "/twitter-login-200",
       "serve": "/.auth/login/twitter",
       "statusCode": 200
@@ -12,6 +18,12 @@
       "serve": "/foo.html",
       "statusCode": 200
     },    
+
+    {
+      "route": "/test-api-301",
+      "serve": "/api/debugger",
+      "statusCode": 301
+    },
 
     {
       "route": "/twitter-login-301",
