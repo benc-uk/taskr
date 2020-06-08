@@ -2,34 +2,28 @@
   "routes": [
 
     {
-      "route": "/test/*",
-      "serve": "/api/debugger",
+      "route": "/twitter-login-200",
+      "serve": "/.auth/login/twitter",
       "statusCode": 200
     },
 
     {
-      "route": "/foo/*",
+      "route": "/test-page-200",
       "serve": "/foo.html",
       "statusCode": 200
     },    
 
     {
-      "route": "/test301",
-      "serve": "/api/debugger",
+      "route": "/twitter-login-301",
+      "serve": "/.auth/login/twitter",
       "statusCode": 301
-    },   
+    },  
 
     {
-      "route": "/postLogin",
-      "serve": "/api/postLogin",
-      "statusCode": 200
-    },
-
-    {
-      "route": "/wibble",
+      "route": "/test-page-301",
       "serve": "/foo.html",
       "statusCode": 301
-    },
+    },      
 
     {
       "route": "/*",
