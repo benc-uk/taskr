@@ -14,6 +14,11 @@
       "route": "/wibble",
       "serve": "/foo.html",
       "statusCode": 301
-    }
+    },
+    {
+      "route": "/test-redirect",
+      "serve": "/api/debugger",
+      "statusCode": 301
+    }    
   ]
 }
