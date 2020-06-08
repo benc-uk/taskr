@@ -2,11 +2,13 @@
   "routes": [
     {
       "route": "/test",
-      "serve": "/api/debugger"
+      "serve": "/api/debugger",
+      "statusCode": 200
     },
     {
       "route": "/postLogin",
-      "serve": "/api/postLogin"
+      "serve": "/api/postLogin",
+      "statusCode": 200
     },
     {
       "route": "/wibble",
