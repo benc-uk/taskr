@@ -1,0 +1,208 @@
+swagger: "2.0"
+info:
+  title: Taskr API
+  description: Task management demo for Azure Static Apps
+  version: 0.0.1
+#host: localhost:7071
+basePath: /api
+consumes:
+  - application/json
+produces:
+  - application/json
+schemes:
+  - http
+tags:
+- name: tasks
+  description: Operations on tasks
+- name: users
+  description: Operations on users   
+paths:
+  /tasks/{taskId}:
+    get:
+      tags: [ tasks ]
+      summary: Returns a single task
+      parameters:
+        - in: path
+          name: taskId
+          required: true
+          type: string
+          minimum: 1
+          description: Task id     
+      responses:
+        404:
+          description: No task found matching taskId        
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
+    delete:
+      tags: [ tasks ]      
+      summary: Delete an existing task
+      parameters:
+        - in: path
+          name: taskId
+          required: true
+          type: string
+          minimum: 1
+          description: Task id      
+      responses:
+        500:
+          description: No task found matching id       
+        204:
+          description: OK, task was deleted
+
+  /tasks:
+    get:
+      tags: [ tasks ]      
+      summary: Query tasks by user
+      parameters:
+        - in: query
+          name: owner
+          required: false
+          type: string
+          minimum: 1
+          description: Owner user id
+        - in: query
+          name: assignee
+          required: false
+          type: string
+          minimum: 1
+          description: Assignee user id             
+      responses:
+        400:
+          description: Invalid query
+        404:
+          description: No results         
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Task'
+    post:
+      tags: [ tasks ]
+      summary: Create a new task
+      parameters:
+        - in: body
+          name: task
+          required: true
+          type: object
+          schema:
+            $ref: '#/definitions/Task'       
+      responses:
+        400:
+          description: Invalid task input       
+        200:
+          description: OK
+          schema:
+            type: object
+            $ref: '#/definitions/Task'
+    put:
+      tags: [ tasks ]      
+      summary: Update an existing task
+      parameters:
+        - in: body
+          name: task
+          required: true
+          type: object
+          schema:
+            $ref: '#/definitions/Task'       
+      responses:
+        400:
+          description: Invalid task input   
+        404:
+          description: No task found matching id       
+        200:
+          description: OK
+          schema:
+            type: object
+            $ref: '#/definitions/Task'
+
+  /users:
+    get:
+      tags: [ users ]      
+      summary: List all users   
+      responses:    
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+
+definitions:
+  Task:
+    type: object
+    required:
+      - id
+      - title
+      - complete
+      - owner
+      - notes
+      - assignedTo
+      - priority
+      - modifiedDate
+    properties:
+      id:
+        type: string
+        description: The task ID
+        example: "foo123"
+      title:
+        type: string
+        minLength: 1
+        description: The task title
+        example: "Buy some cheese"
+      complete:
+        type: boolean
+        description: Is the task finished yet
+        example: true
+      owner:
+        type: string
+        description: The user-id of the task owner
+        example: "user123"
+      notes:
+        type: string
+        description: The task notes, free text
+        example: "Get the best cheese money can buy!"
+      assignedTo:
+        type: array
+        minItems: 1
+        items:
+          type: string
+        description: List of user-ids of assigned users
+        example: [ "dave456" ]
+      priority:
+        type: integer
+        minimum: 1
+        maximum: 5
+        description: The task priority
+        example: 3
+      modifiedDate:
+        type: string
+        format: date-time
+        description: Last modification date & time in ISO 8601 format
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The user ID
+        example: "dave789"
+      userId:
+        type: string
+        description: The user ID
+        example: "dave789"        
+      userDetails:
+        type: string
+        description: The email or username, depending on provider
+        example: "bob@microsoft.com"
+      identityProvider:
+        type: string
+        description: The provider the user signed in with
+        example: "aad"
+      userRoles:
+        type: array
+        description: List of user roles
+        items:
+          type: string
+        example: [ "anonymous", "authenticated" ]  

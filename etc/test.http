@@ -1,9 +1,17 @@
-### Get by owner
-GET http://localhost:7071/api/tasks?rtr=4&owner=ben123
+# =================================================
+# Tasks API
+# =================================================
+
+### List by owner
+GET http://localhost:7071/api/tasks?rtr=4&owner=dave
 
 
-### Get by assignee
-GET http://localhost:7071/api/tasks?assignee=jason123
+### List by assignee
+GET http://localhost:7071/api/tasks?assignee=lou_reeds
+
+
+### Get single by id
+GET http://localhost:7071/api/tasks/eqzsq
 
 
 ### Create a task
@@ -11,12 +19,29 @@ POST http://localhost:7071/api/tasks
 Content-Type: application/json
 
 {
-  "title": "Demo task {{$randomInt 1 100000}}",
-  "assignedTo": [ "wewew" ],
+  "title": "wibble blah hat 2",
   "owner": "dave",
   "notes": "This is a test, bye!"
 }
 
+
+### Update a task
+PUT http://localhost:7071/api/tasks
+Content-Type: application/json
+
+{
+  "id": "wzLUK",
+  "notes": "sdfdfsdfsdf",
+  "assignedTo": [ "lou_reed" ]
+}
+
+
+### Delete a task
+DELETE http://localhost:7071/api/tasks/ONy1ruuuu
+
+# =================================================
+# Users API
+# =================================================
 
 ### Get all users
 GET http://localhost:7071/api/users

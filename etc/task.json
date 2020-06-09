@@ -12,7 +12,6 @@
     "notes",
     "assignedTo",
     "priority",
-    "createdDate",
     "modifiedDate"
   ],
   "properties": {
@@ -58,17 +57,16 @@
       "maximum": 5,
       "title": "The task priority"
     },
-    "createdDate": {
-      "$id": "#/properties/createdDate",
-      "type": "string",
-      "format": "date-time",
-      "title": "Created date & time in ISO 8601 format"
-    },
     "modifiedDate": {
       "$id": "#/properties/modifiedDate",
       "type": "string",
       "format": "date-time",
       "title": "Last modification date & time in ISO 8601 format"
-    }    
+    },
+    "_rid": { "type": "string" },
+    "_self": { "type": "string" },
+    "_etag": { "type": "string" },
+    "_ts": { "type": "number" },
+    "_attachments": { "type": "string" }  
   }
 }

@@ -8,23 +8,20 @@ module.exports = async function (context, req) {
     // Get Cosmos DB container
     const tasks = await cosmos.tasks()
 
-    // Inject our own ids
     let task = req.body
-    task.id = utils.makeId(5)
 
     // Logic for handling defaults
-    if (!task.assignedTo) {
-      task.assignedTo = [task.owner]
-    }
-    let now = new Date().toISOString()
-    if (!task.createdDate) {
-      task.createdDate = now
-    }
-    if (!task.modifiedDate) {
-      task.modifiedDate = now
+    if (!task.id) {
+      task.id = utils.makeId(5)
+    } else {
+      errorStatus = 400
+      throw new Error('Must not provide id on POST operations')
     }
     if (!task.complete) {
       task.complete = false
+    }
+    if (!task.priority) {
+      task.priority = 3
     }
     if (!task.owner) {
       // Get the owner from the special client-principal header
@@ -34,9 +31,13 @@ module.exports = async function (context, req) {
         task.owner = JSON.parse(principal.userId)
       }
     }
+    if (!task.assignedTo) {
+      task.assignedTo = [task.owner]
+    }
+    task.modifiedDate = new Date().toISOString()
 
     // Validate task against schema
-    let ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
+    let ajv = new Ajv()
     const schema = require('../../etc/task.json')
     let validate = ajv.compile(schema)
     let valid = validate(task)

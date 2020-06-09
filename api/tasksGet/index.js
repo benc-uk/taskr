@@ -3,31 +3,33 @@ const cosmos = require('../lib/cosmos.js')
 module.exports = async function (context, req) {
   let errorStatus = 500
 
-  if (!(req.query.owner || req.query.assignee)) {
+  if (!req.params.id && !(req.query.owner || req.query.assignee)) {
     context.res = {
       headers: { 'content-type': 'application/json' },
       status: 400,
-      body: { message: 'Please specify ?owner=<uid> or ?assignee=<uid>', error: true }
+      body: { message: 'Please specify id on path `/{taskid}` or ?owner=<userid> or ?assignee=<userid>', error: true }
     }
     return
   }
 
   try {
-    let userId = ''
+    let paramValue = ''
     let query = ''
-    let mode = ''
     // Query and parameters vary if we're looking for owner or assignee
     if (req.query.owner) {
-      mode = 'owner'
-      userId = req.query.owner
-      query = 'SELECT * from c WHERE c.owner = @user'
+      paramValue = req.query.owner
+      query = 'SELECT * from c WHERE c.owner = @param'
     }
     if (req.query.assignee) {
-      mode = 'assignee'
-      userId = req.query.assignee
-      query = 'SELECT * from c WHERE ARRAY_CONTAINS(c.assignedTo, @user)'
+      paramValue = req.query.assignee
+      query = 'SELECT * from c WHERE ARRAY_CONTAINS(c.assignedTo, @param)'
     }
-    if (!userId || !query) { throw new Error('Something bad happened') }
+    // Other option is to get a single task by id
+    if (req.params.id) {
+      paramValue = req.params.id
+      query = 'SELECT * from c WHERE c.id = @param'
+    }
+    if (!paramValue || !query) { throw new Error('Malformed request') }
 
     // Get Cosmos DB container
     const tasks = await cosmos.tasks()
@@ -36,7 +38,7 @@ module.exports = async function (context, req) {
     const querySpec = {
       query: query,
       parameters: [
-        { name: '@user', value: userId }
+        { name: '@param', value: paramValue }
       ]
     }
     const { resources: items } = await tasks.items
@@ -47,14 +49,14 @@ module.exports = async function (context, req) {
     // Rather than a 200 and an empty array
     if (items.length <= 0) {
       errorStatus = 404
-      throw new Error(`No tasks found where '${mode}' is '${userId}'`)
+      throw new Error('No tasks found for request')
     }
 
-    // Simply return all results (held in resources.items array)
+    // Simply return all results (held in resources.items array) or first result if by id
     context.res = {
       headers: { 'content-type': 'application/json' },
       status: 200,
-      body: items
+      body: req.params.id ? items[0] : items
     }
   } catch (err) {
     let message = typeof err != 'string' ? (err.message ? err.message : err) : err

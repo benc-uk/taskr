@@ -7,6 +7,6 @@
     "COSMOS_KEY": "CHANGE_ME"
   },
   "Host": {
-    "CORS": "http://localhost:3000"
+    "CORS": "*"
   }
 }
