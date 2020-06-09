@@ -1,7 +1,7 @@
 {
   "routes": [
     {
-      "route": "/api-docs",
+      "route": "/api-docs/*",
       "serve": "/api-docs",
       "statusCode": 200
     }, 
