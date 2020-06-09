@@ -1,6 +1,11 @@
 {
   "routes": [
     {
+      "route": "/api-docs",
+      "serve": "/api-docs/index.html",
+      "statusCode": 200
+    }, 
+    {
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200
