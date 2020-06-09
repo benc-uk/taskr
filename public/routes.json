@@ -2,7 +2,7 @@
   "routes": [
     {
       "route": "/api-docs",
-      "serve": "/api-docs/index.html",
+      "serve": "/api-docs",
       "statusCode": 200
     }, 
     {
