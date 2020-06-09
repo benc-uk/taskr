@@ -86,7 +86,6 @@ paths:
         - in: body
           name: task
           required: true
-          type: object
           schema:
             $ref: '#/definitions/Task'       
       responses:
@@ -104,7 +103,6 @@ paths:
         - in: body
           name: task
           required: true
-          type: object
           schema:
             $ref: '#/definitions/Task'       
       responses:
