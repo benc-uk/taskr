@@ -24,7 +24,7 @@ module.exports = async function (context, req) {
 
     // Validate task against schema
     let ajv = new Ajv()
-    const schema = require('../../etc/task.json')
+    const schema = require('../lib/task.json')
     let validate = ajv.compile(schema)
     let valid = validate(task)
     if (!valid) {
