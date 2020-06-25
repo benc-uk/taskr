@@ -1,23 +1,74 @@
 {
   "version": "2.0.0",
   "tasks": [
+    //
+    // Start Functions host to run API locally
+    //    
     {
+      "label": "Start Functions host",
       "type": "func",
       "command": "host start",
       "problemMatcher": "$func-watch",
       "isBackground": true,
       "options": {
         "cwd": "${workspaceFolder}/api"
-      }
+      },
+      "dependsOn": [
+        "npm: install - api"
+      ]
     },
+
+    //
+    // Start React local test server with hot reload
+    //
     {
       "label": "Start React server",
-      "type": "shell",
-      "command": "npm",
-      "args": ["run", "start"],
+      "type": "npm",
+      "script": "start",
       "isBackground": true,
       "options": {
-        "cwd": "${workspaceFolder}"
+        "cwd": "${workspaceFolder}",
+        "env": {
+          // Prevent webpack from opening browser
+          "BROWSER": "none"
+        }
+      },
+      "dependsOn": [
+        "npm: install"
+      ],
+      // This nonsense doesn't do anything, but is important
+      // It makes VSCode not wait for this task to finish 
+      // https://stackoverflow.com/a/54017304/1343261
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".",
+            "endsPattern": "."
+          }
+        }
+      ]
+    },
+
+    //
+    // Wipe & refresh node_modules
+    //
+    {
+      "label": "Clean & install node_modules",
+      "type": "shell",
+      "linux": {
+        "command": "rm -rf node_modules && rm -rf api/node_modules && npm install && cd api && npm install"
+      },
+      "windows": {
+        "command": "rm -r -fo node_modules; rm -r -fo api/node_modules; npm install; cd api; npm install"
       },
       "problemMatcher": []
     }

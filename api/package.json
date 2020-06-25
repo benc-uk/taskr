@@ -6,7 +6,7 @@
   "author": "Ben Coleman",
   "license": "MIT",
   "dependencies": {
-    "@azure/cosmos": "^3.6.3",
+    "@azure/cosmos": "^3.7.2",
     "ajv": "^6.12.2"
   }
 }

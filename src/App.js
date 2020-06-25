@@ -4,10 +4,19 @@ import { Stack } from "@fluentui/react";
 import TaskList from './components/TaskList';
 import AddTask from './components/AddTask';
 
-const persistTask = async (task) => {
-  let response = await fetch(`${process.env.REACT_APP_API}/getTest?name=${task}`);
-  let text = await response.text();
-  return text;
+const persistTask = async (taskName) => {
+  // bare minimum task object
+  let task = {
+    "title": taskName,
+    "notes": "This is a test, bye!",
+    "owner": "HarryHill"
+  };
+  let response = await fetch(`${process.env.REACT_APP_API}/tasks`, { 
+    method: 'POST', 
+    body: JSON.stringify(task) 
+  });
+  let resp = await response.json();
+  return resp.title;
 };
 
 function App() {

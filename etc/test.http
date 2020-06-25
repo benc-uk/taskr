@@ -3,7 +3,7 @@
 # =================================================
 
 ### List by owner
-GET http://localhost:7071/api/tasks?rtr=4&owner=dave
+GET http://localhost:7071/api/tasks?&owner=ben
 
 
 ### List by assignee

@@ -1,28 +1,45 @@
 {
   "version": "0.2.0",
   "configurations": [
+    //
+    // Debug config for React launching chrome
+    //
     {
-
-      "name": "Debug React (Chrome)",
+      "name": "Debug React",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}/",
+      "webRoot": "${workspaceFolder}",
       "sourceMapPathOverrides": {
-        "webpack:///src/*": "${webRoot}/*"
+        "webpack:///src/*": "${webRoot}/*",
+        // This magic string makes the debugger & breakpoints work
+        "/*": "/__vscode-remote-uri__/*"
       },
-      // "pathMapping": {
-      //   "http://localhost:3000/": "${workspaceFolder}/src"
-      // }
-      //"preLaunchTask": "npm: start"
+      "pathMapping": {
+        "http://localhost:3000/": "${workspaceFolder}/src"
+      },
+      "preLaunchTask": "Start React server"
     },
     
+    //
+    // Debug config for Functions & API
+    //
     {
-      "name": "Debug API (Functions)",
+      "name": "Debug API",
       "type": "node",
       "request": "attach",
       "port": 9229,
-      "preLaunchTask": "func: host start"
+      "preLaunchTask": "Start Functions host"
+    }
+  ],
+
+  //
+  // Combined launch & debug to run the whole app locally
+  //
+  "compounds": [
+    {
+      "name": "Combined App",
+      "configurations": ["Debug API", "Debug React"]
     }
   ]
 }
