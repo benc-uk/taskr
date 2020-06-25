@@ -11,12 +11,21 @@ const persistTask = async (taskName) => {
     "notes": "This is a test, bye!",
     "owner": "HarryHill"
   };
+
   let response = await fetch(`${process.env.REACT_APP_API}/tasks`, { 
     method: 'POST', 
     body: JSON.stringify(task) 
   });
-  let resp = await response.json();
-  return resp.title;
+
+  let respData = await response.json();
+
+  if(response.ok) {
+    return respData.title;
+  } else {
+    // API should return error details as JSON
+    console.log("API ERROR", JSON.stringify(respData));
+    throw new Error(respData);
+  }
 };
 
 function App() {
