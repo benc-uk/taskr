@@ -2,7 +2,7 @@ import React from 'react';
 import { Stack, Label } from "@fluentui/react";
 import TaskItem from './TaskItem';
 
-function TaskList(props) {
+const TaskList = (props) => {
 
     return (
         <Stack gap={10} >
@@ -12,6 +12,6 @@ function TaskList(props) {
             <Label>Task list is empty...</Label>}
         </Stack>
     );
-}
+};
 
 export default TaskList;

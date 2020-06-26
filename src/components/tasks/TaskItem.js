@@ -1,7 +1,7 @@
 import React from 'react';
 import { Stack, Label } from '@fluentui/react';
 
-function TaskItem(props) {
+const TaskItem = (props) => {
     return (
         <Stack>
             <Stack horizontal verticalAlign="center" horizontalAlign="space-between">
@@ -9,6 +9,6 @@ function TaskItem(props) {
             </Stack>
         </Stack>
     );
-}
+};
 
-export default TaskItem
+export default TaskItem;

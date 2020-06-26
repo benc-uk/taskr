@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
+
 import { Stack, TextField, PrimaryButton } from "@fluentui/react";
 
-function AddTask(props) {
+const AddTask = (props) => {
 
     const [taskName, setTaskName] = useState("");
     const addTask = () => {
         props.addTask(taskName);
         setTaskName("");
-    }
+    };
+
     const setTask = (e) => {
         setTaskName(e.target.value);
-    }
+    };
 
     return (
         <Stack>
@@ -22,6 +24,6 @@ function AddTask(props) {
             </Stack>
         </Stack>
     );
-}
+};
 
 export default AddTask;
