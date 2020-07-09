@@ -12,9 +12,9 @@ const Authenticator = ({ onLoggedIn, children }) => {
         };
 
         const makeRequest = async () => {
-            const userOverride = JSON.parse(process.env.REACT_APP_CLIENT_PRINCIPAL_OVERRIDE);
+            const userOverride = process.env.REACT_APP_CLIENT_PRINCIPAL_OVERRIDE;
             if (userOverride) {
-                loginAs(userOverride);
+                loginAs(JSON.parse(userOverride));
                 return;
             }
             try {
