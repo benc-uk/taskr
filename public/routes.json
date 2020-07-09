@@ -9,9 +9,7 @@
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200,
-      "allowedRoles": [
-        "authenticated"
-      ]
+      "allowedRoles": []
     }
   ],
   "platformErrorOverrides": []
