@@ -13,5 +13,8 @@
   "eslint.workingDirectories": [
     "./src",
     "./api"
-  ]
+  ],
+  "files.exclude": {
+    "public/api-docs/": true
+  }
 }

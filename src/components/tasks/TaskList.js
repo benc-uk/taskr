@@ -1,16 +1,33 @@
 import React from 'react';
-import { Stack, Label } from "@fluentui/react";
-import TaskItem from './TaskItem';
+
+import { Flex, Text, List } from "@fluentui/react-northstar";
 
 const TaskList = (props) => {
 
+    
+
+    if (!props.tasks || props.tasks.length === 0) {
+        return (
+            <Flex>
+                <Text content="Quick! Go add a task!" />
+            </Flex>
+        );
+    }
+
+    // list of items
+    const items = props.tasks.map(task => {
+        return (
+            {
+                key: task.id,
+                header: task.title,
+                content: task.notes,
+            }
+        );
+    });
+
     return (
-        <Stack gap={10} >
-            { props.tasks.length > 0 ? props.tasks.map((task) => (
-                <TaskItem task={task} key={task.id}/>
-            )): 
-            <Label>Task list is empty...</Label>}
-        </Stack>
+        <List items={items}>
+        </List>
     );
 };
 

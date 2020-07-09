@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
+import { Provider, teamsTheme } from '@fluentui/react-northstar';
+
 import App from './App';
+
+import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { Fabric } from "@fluentui/react";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Fabric>
+    <Provider theme={teamsTheme}>
       <App />
-    </Fabric>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

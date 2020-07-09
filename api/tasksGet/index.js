@@ -45,13 +45,6 @@ module.exports = async function (context, req) {
       .query(querySpec)
       .fetchAll()
 
-    // Have the API return a 404 in the event of no results
-    // Rather than a 200 and an empty array
-    if (items.length <= 0) {
-      errorStatus = 404
-      throw new Error('No tasks found for request')
-    }
-
     // Simply return all results (held in resources.items array) or first result if by id
     context.res = {
       headers: { 'content-type': 'application/json' },

@@ -1,11 +1,4 @@
-const saveTask = async (taskName) => {
-    // bare minimum task object
-    let task = {
-        "title": taskName,
-        "notes": "This is a test, bye!",
-        "owner": "HarryHill"
-    };
-
+const saveTask = async (task) => {
     let response = await fetch(`${process.env.REACT_APP_API}/tasks`, {
         method: 'POST',
         body: JSON.stringify(task)
@@ -14,7 +7,7 @@ const saveTask = async (taskName) => {
     let respData = await response.json();
 
     if (response.ok) {
-        return respData.title;
+        return respData;
     } else {
         // API should return error details as JSON
         if (respData.message) {
@@ -24,29 +17,62 @@ const saveTask = async (taskName) => {
     }
 };
 
-const findTasksByOwner = (owner) => {
-    return [{ id: 1, name: "Task Item 1 (owner)" }, { id: 2, name: "Task Item 2  (owner)" }];
+const findTaskById = async (identifier) => {
 };
 
-const findTasksByAssignee = (assignee) => {
-    return [{ id: 1, name: "Task Item 1 (assignee)" }, { id: 2, name: "Task Item 2  (assignee)" }];
-};
+const findTasksByOwner = async (owner) => {
+    let response = await fetch(`${process.env.REACT_APP_API}/tasks?owner=${owner}`, {
+        method: 'GET'
+    });
 
-const findTaskById = (id) => {
-    return { id, name: "Task Item (id)" };
-};
+    let respData = await response.json();
 
-const findUsers = () => {
-    return [
-        {
-            id: 1,
-            name: 'Person 1'
-        },
-        {
-            id: 2,
-            name: 'Person 2'
+    if (response.ok) {
+        return respData;
+    } else {
+        // API should return error details as JSON
+        if (respData.message) {
+            throw new Error(respData.message);
         }
-    ];
+        throw new Error(respData);
+    }
+};
+
+const findTasksByAssignee = async (assignee) => {
+    let response = await fetch(`${process.env.REACT_APP_API}/tasks?assignee=${assignee}`, {
+        method: 'GET'
+    });
+
+    let respData = await response.json();
+
+    if (response.ok) {
+        return respData;
+    } else {
+        // API should return error details as JSON
+        if (respData.message) {
+            throw new Error(respData.message);
+        }
+        throw new Error(respData);
+    }
+};
+
+
+const findUsers = async () => {
+    let response = await fetch(`${process.env.REACT_APP_API}/users`, {
+        method: 'GET'
+    });
+
+    let respData = await response.json();
+
+    if (response.ok) {
+        return respData;
+    } else {
+        // API should return error details as JSON
+        if (respData.message) {
+            throw new Error(respData.message);
+        }
+        throw new Error(respData);
+    }
 };
 
 export {

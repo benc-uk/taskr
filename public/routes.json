@@ -1,10 +1,6 @@
 {
   "routes": [
     {
-      "route": "/login",
-      "serve": "/.auth/login/aad"
-    },
-    {
       "route": "/api-docs/*",
       "serve": "/api-docs",
       "statusCode": 200
@@ -18,11 +14,5 @@
       ]
     }
   ],
-  "platformErrorOverrides": [
-    {
-      "errorType": "Unauthenticated",
-      "statusCode": "302",
-      "serve": "/login"
-    }
-  ],
+  "platformErrorOverrides": []
 }

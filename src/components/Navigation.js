@@ -1,47 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import { Nav } from "@fluentui/react";
+import { Menu } from "@fluentui/react-northstar";
 
-import { findUsers } from '../api';
-
-const Navigation = () => {
-    const [people, setPeople] = useState([]);
-    const [loadingState, setLoadingState] = useState('');
-
-    useEffect(() => {
-        const makeRequest = async () => {
-            const users = await findUsers();
-            setLoadingState('loaded');
-            setPeople(users);
-        };
-        if (loadingState !== '') return;
-        makeRequest();
-    }, [loadingState]);
+const Navigation = ({ view, onNavigation }) => {
+    const items = [
+        {
+            content: 'Assigned',
+            key: 'assigned',
+            onClick: () => { onNavigation('assigned'); }
+        },
+        {
+            content: 'Owned',
+            key: 'owned',
+            onClick: () => { onNavigation('owned'); }
+        }
+    ];
 
     return (
-        <Nav groups={[
-            {
-                links: [
-                    {
-                        name: 'Me',
-                        url: '/',
-                        key: 'key-me'
-                    },
-                    {
-                        name: 'People',
-                        url: '/people',
-                        links: people.map(blob => {
-                            return {
-                                name: blob.name,
-                                key: `key-person-${blob.id}`,
-                                url: `/people/${blob.id}`
-                            };
-                        }),
-                        isExpanded: true
-                    }
-                ]
-            }
-        ]} />
+        <Menu items={items}
+            vertical={true}
+            pointing="start"
+            defaultActiveIndex={items.map(i => i.key).indexOf(view)} />
     );
 };
 

@@ -1,16 +1,12 @@
 import React from 'react';
 
-import { Stack } from "@fluentui/react";
-
 import { TaskContainer } from './tasks';
 
-const Content = () => {
+const Content = (props) => {
     return (
-        <Stack horizontalAlign="center">
-            <Stack gap={25}>
-                <TaskContainer />
-            </Stack>
-        </Stack>
+        <div>
+            <TaskContainer {...props} />
+        </div>
     );
 };
 

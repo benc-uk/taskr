@@ -3,42 +3,55 @@ import React, { useState, useEffect } from 'react';
 import TaskList from './TaskList';
 import AddTask from './AddTask';
 
-import { saveTask, findTasksByAssignee } from '../../api';
+import { findTasksByAssignee, findTasksByOwner, saveTask } from '../../api';
 
-const TaskContainer = (props) => {
+const TaskContainer = ({ view, userId }) => {
     const [tasks, setTasks] = useState([]);
     const [loadingState, setLoadingState] = useState('');
 
     useEffect(() => {
         const makeRequest = async () => {
             try {
-                const tasks = await findTasksByAssignee('Jason');
-                setLoadingState('loaded');
+                let tasks;
+                if (view === 'owned') {
+                    tasks = await findTasksByOwner(userId);
+                } else {
+                    tasks = await findTasksByAssignee(userId);
+                }
+                setLoadingState(view);
                 setTasks(tasks);
             } catch (e) {
                 console.error('Failed to find tasks ' + e.message);
+
             }
         };
-        if (loadingState !== '') return;
+        if (loadingState === view) return;
         makeRequest();
-    }, [loadingState]);
+    }, [loadingState, tasks, userId, view]);
 
-    const addTask = async (taskName) => {
-        if (taskName !== "") {
-            const newId = tasks.length + 1;
+    const addTask = async (task) => {
+        if (task) {
             try {
-                const text = await saveTask(taskName);
-                const newTasks = [...tasks, { id: newId, name: text }];
-                setTasks(newTasks);
+                const result = await saveTask(task);
+                // this optimistically adds the newly created task
+                // to the UI - but we only want to do it if we are
+                // the owner or assignee, depending on the UI state
+                const shouldAddResultToCurrentView =
+                    (view === 'assigned' && task.assignedTo.indexOf(userId) >= 0) ||
+                    (view === 'owned' && task.owner === userId);
+                if (shouldAddResultToCurrentView) {
+                    const newTasks = [...tasks, result];
+                    setTasks(newTasks);
+                }
             } catch (e) {
-                console.error('Failed to persist task ' + e.message);
+                console.error('Failed to persist task ' + JSON.stringify(task));
             }
         }
     };
 
     return (
         <div>
-            <AddTask addTask={addTask} />
+            <AddTask addTask={addTask} owner={userId} />
             <TaskList tasks={tasks} />
         </div>
     );
